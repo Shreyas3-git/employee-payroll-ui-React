@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
+import { Header } from './component/header/employeeheader';
+import { Employeehome } from './component/employeehome/employeehome';
+import { Employeeform } from './component/addemployeeform/employeeform';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render()
+  {
+    return (
+      <div>
+        <Header/>
+        {/* <Router>
+            <Route path="/" exact component={Employeehome}/>
+            <Route path="/addemployee" exact component={Employeeform}/>
+        </Router> */}
+        <Employeeform/>
+      </div>
+    );  
+  }
 }
 
 export default App;
