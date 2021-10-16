@@ -11,12 +11,11 @@ class App extends React.Component {
     return (
       <div>
         <Header/>
-        {/* <Router>
+        <Router>
             <Route path="/" exact component={Employeehome}/>
             <Route path="/addemployee" exact component={Employeeform}/>
-        </Router> */}
-        <Employeeform/>
-      </div>
+        </Router>
+         </div>
     );  
   }
 }

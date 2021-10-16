@@ -4,11 +4,10 @@ import {DatePickerComponent} from '@syncfusion/ej2-react-calendars';
 import {TextField} from '@material-ui/core';
 import { Slider } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-export class Employeeform extends React.Component
+export function Employeeform() 
 {
      
-    render()
-    {
+
         return(
         <div>
                 <div class="form-content">   
@@ -127,5 +126,5 @@ export class Employeeform extends React.Component
         )
         
     }
-}    
+    
 
