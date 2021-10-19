@@ -13,6 +13,14 @@ export class Employeehome extends React.Component
         }
     }
 
+    toRefreshdeletedRecord = () => {
+        return httpService.getListOfEmployee().then(data => {
+            this.numberOfRecords = data.data.data.length;
+            console.log(data.data.data);
+            this.setState({employeeInfo: data.data.data})
+        })
+    }
+
     componentDidMount() {
         return httpService.getListOfEmployee().then(data => {
             this.numberOfRecords = data.data.data.length;
@@ -21,6 +29,11 @@ export class Employeehome extends React.Component
         })
     }
 
+    removeEmployee = (id) => {
+        return httpService.deleteEmployeeById(id).then(response => {
+            this.toRefreshdeletedRecord();
+        })
+    }
     render()
     {
         return(
@@ -76,7 +89,9 @@ export class Employeehome extends React.Component
                         <td>{employee.employeeSalary}</td>
                         <td>{employee.employeeStartDate}</td>
                         <td>
-                            <img id={employee.id} src="../pictures/updateNdeleteLogo/delete-black-18dp.svg" alt=""/>
+                            <img id={employee.id} onClick={() => this.removeEmployee(employee.id)} 
+                            src="../pictures/updateNdeleteLogo/delete-black-18dp.svg" 
+                            alt="" />
 
                             <img id={employee.id} src="../pictures/updateNdeleteLogo/create-black-18dp.svg" alt=""/>
                         </td>

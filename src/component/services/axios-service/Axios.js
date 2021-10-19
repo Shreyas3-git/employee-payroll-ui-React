@@ -11,3 +11,7 @@ exports.insertService = (url,employee) => {
 
     return axios.post(baseUrl + url, employee);
 }
+
+exports.deleteService = (url,httpParam) => {
+  return axios.delete(baseUrl + url , httpParam);
+}

@@ -13,5 +13,10 @@ exports.insertEmployee = (employeeObj) => {
           'Content-Type' : 'application/json'  
         }
     }
-    return httpService.insertService(_url,employeeObj,httpHeader);
+   return httpService.insertService(_url,employeeObj,httpHeader);
+}
+
+exports.deleteEmployeeById = (id) => {
+    let _url = `/delete/${id}`;
+    return httpService.deleteService(_url);
 }
