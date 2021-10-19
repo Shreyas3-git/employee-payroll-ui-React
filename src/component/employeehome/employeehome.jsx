@@ -1,9 +1,25 @@
 import React from 'react'
-
 import './employeehome.css';
-// import {Header} from './component/header/employeeheader';
+const httpService = require('../services/userService/User'); 
+
 export class Employeehome extends React.Component
 {
+    constructor()
+    {
+        super();
+        this.state = {
+            employeeInfo : []
+        }
+    }
+
+    componentDidMount() {
+        return httpService.getListOfEmployee().then(data => {
+            this.numberOfRecords = data.data.data.length;
+            console.log(data.data.data);
+            this.setState({employeeInfo: data.data.data})
+        })
+    }
+
     render()
     {
         return(
@@ -11,7 +27,7 @@ export class Employeehome extends React.Component
           <div class="main-content">
             <div class="header-content">
                 <div class="emp-detail-text">
-                    Employee Details <div class="emp-count">10</div>
+                    Employee Details <div class="emp-count">{this.numberOfRecords}</div>
                 </div>
                 <a href="employeeform.jsx" class="add-button">
                     <img src="../pictures/updateNdeleteLogo/add-24px.svg" alt="add button"/>Add User
@@ -21,6 +37,7 @@ export class Employeehome extends React.Component
 
                 <div>
                 <table id="table-display" class="table">
+                <thead>
                 <tr>
                     <th></th>
                     <th>Name</th>
@@ -30,25 +47,44 @@ export class Employeehome extends React.Component
                     <th>Start Date</th>
                     <th>Actions</th>
                 </tr>
-                    <tr>
+                </thead>
+                <tbody>
+                {
+                    this.state.employeeInfo.map(
+                        (employee) =>
+                    
+                    <tr key={employee.id}>
                         <td>
-                            <img src="../pictures/profilepic/Ellipse -3.png" alt="profile"/>
+                            <img className="profile" src={employee.profilepic} alt=""/>
                         </td>
-                        <td>Tom Cruise</td>
-                        <td>Male</td>
+                        <td>{employee.employeeName}</td>
+                        <td>{employee.employeeGender}</td>
+                        <div className = "dept-label">
+                        <td>{employee.employeeDepartment}</td>
+                        </div>
+                        {/* <td>
+                            {
+                                employee.employeeDepartment
+                                .map((dept) => 
+                                    <div className="dept-label">
+                                            {dept}
+                                    </div>
+                                )
+                            }
+                        </td> */}
+                        <td>{employee.employeeSalary}</td>
+                        <td>{employee.employeeStartDate}</td>
                         <td>
-                            <div class="dept-label">HR</div>
-                            <div class="dept-label">Finance</div>
-                        </td>
+                            <img id={employee.id} src="../pictures/updateNdeleteLogo/delete-black-18dp.svg" alt=""/>
 
-                        <td>50000</td>
-                        <td>10-10-2021</td>
-                        <td>
-                            <img src="../pictures/updateNdeleteLogo/delete-black-18dp.svg" alt="delete-img"/>
-                            <img src="../pictures/updateNdeleteLogo/create-black-18dp.svg" alt="update-img"/>
+                            <img id={employee.id} src="../pictures/updateNdeleteLogo/create-black-18dp.svg" alt=""/>
                         </td>
                     </tr>
-                </table>
+
+                    )
+                }
+                  </tbody>
+                </table>  
             </div>
         </div>
         )

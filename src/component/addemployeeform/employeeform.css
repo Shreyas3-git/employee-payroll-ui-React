@@ -87,10 +87,27 @@ body {
 }
 
 .date-picker {
-    width: 250px;
-    border: 2px solid grey;
+    width: 250px; 
+     border: 3px solid grey;
+}
+.radio-group {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
 }
 
+.gender-group-direction {
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column-reverse;
+}
+.width-text {
+    width: 670px;
+}
 
 .text-material {
     width: 700px;
@@ -131,17 +148,14 @@ label {
     height: 90px;
      
 }
-.profile-radio-content {
-    display: flex;
-    flex: 0 0 2vw;
-    flex-direction: row;
-}
+
 
 .profile-radio-content>label {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+
 
 .profile {
     width: 40px;
@@ -188,7 +202,9 @@ select {
     background-color: #f5f5f5;
     margin-left: 425px;
 }
-
+.salary-slider {
+    width: 750px;
+}
 /* .cancelButton {
     text-decoration: none;
     text-align: center;
