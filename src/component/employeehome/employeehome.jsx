@@ -1,3 +1,4 @@
+import { extractEventHandlers } from '@mui/core';
 import React from 'react'
 import './employeehome.css';
 const httpService = require('../services/userService/User'); 
@@ -55,7 +56,7 @@ export class Employeehome extends React.Component
                     
                     <tr key={employee.id}>
                         <td>
-                            <img className="profile" src={employee.profilepic} alt=""/>
+                            <img className="profile" src={employee.profilePic} alt=""/>
                         </td>
                         <td>{employee.employeeName}</td>
                         <td>{employee.employeeGender}</td>

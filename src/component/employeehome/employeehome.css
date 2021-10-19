@@ -92,6 +92,7 @@ td {
     letter-spacing: 0px;
     color: #3d3d3d;
     opacity: 1;
+    font-size:medium;
 }
 
 td:first-child {
