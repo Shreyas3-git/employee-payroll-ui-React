@@ -13,10 +13,25 @@ exports.insertEmployee = (employeeObj) => {
           'Content-Type' : 'application/json'  
         }
     }
-   return httpService.insertService(_url,employeeObj,httpHeader);
+//    toast('New employee added successfully (:');
+    return httpService.insertService(_url,employeeObj,httpHeader);
 }
 
 exports.deleteEmployeeById = (id) => {
     let _url = `/delete/${id}`;
+
+  //  toast('Record deleted successfully (:');
+    
     return httpService.deleteService(_url);
+}
+
+exports.updateEmployeeById = (id,employee) => {
+    let _url = `/update/${id}`;
+
+   let httpHeader = {
+        Headers :{
+            'Content-Type' : 'application/json'
+        } 
+    }
+    return httpService.updateService(_url,employee,httpHeader);
 }

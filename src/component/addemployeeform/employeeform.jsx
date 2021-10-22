@@ -1,7 +1,5 @@
 import React from 'react'
-
 import './employeeform.css';
-
 import {DatePickerComponent} from '@syncfusion/ej2-react-calendars';
 import {TextField} from '@material-ui/core';
 import { Slider } from '@material-ui/core';
@@ -12,12 +10,18 @@ import { FormControlLabel } from '@material-ui/core';
 import { FormLabel } from '@material-ui/core';
 import { Checkbox } from '@material-ui/core';
 import Box from '@mui/material/Box';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { notify } from 'react-notify-toast';
+import { Link } from 'react-router-dom';
 
 const httpService = require('../services/userService/User');
 // function sliderValueCatcher(value) {
 //     return `${value}`;
 // }
 
+
+toast.configure();
 export class Employeeform extends React.Component 
 {
 
@@ -33,7 +37,17 @@ export class Employeeform extends React.Component
             employeeNotes : '',
             profilePic : '',
         }
+
+        // this.changeProfilePicEventHandler = this.changeProfilePicEventHandler.bind(this);
+        // this.changeNameEventHandler = this.changeNameEventHandler.bind(this);
+        // this.changeDepartmentEventHandler = this.changeDepartmentEventHandler.bind(this);
+        // this.changeGenderEventHandler = this.changeGenderEventHandler.bind(this);
+        // this.changeNotesEventHandler = this.changeNotesEventHandler.bind(this);
+        // this.changeSalaryEventHandler = this.changeSalaryEventHandler.bind(this);
+        // this.changeStartDateEventHandler = this.changeStartDateEventHandler.bind(this);
+
     }
+
 
     changeNameEventHandler = (e) => {
         this.setState({
@@ -96,11 +110,12 @@ export class Employeeform extends React.Component
             employeeNotes : this.state.employeeNotes
         }
 
-        httpService.insertEmployee(addEmployee).then(data =>{
+        return httpService.insertEmployee(addEmployee).then(data =>{
             let result = data;
+            toast('New Employee added successflly:');
             if(result.status == 'success') {
                 console.log('Data inserted successfully:',result);
-                alert('New Employee added successflly:');
+               
             }
         }).catch( (errorMsg) => {
             alert('error while processing request:');
@@ -113,10 +128,9 @@ export class Employeeform extends React.Component
         return(
         <div>
                 <div className="form-content">   
-                <form className="form" action="#" onreset="resetForm()"
-                onsubmit="save()">
+                <form className="form" action="#">
                  <div className="form-head">Employee Payroll Form</div>
-                <div class="row-content">
+                <div className="row-content">
         {/* <----------------Employee Name--------------> */}
                     <label for="name" className="label text">Name</label>
                     {/* <input type="text" class="input" id="name" name="name"
@@ -128,7 +142,7 @@ export class Employeeform extends React.Component
                     <error-output className="text-error" for="name"></error-output>
                 </div>
             {/* <----------------Employee Profile------------> */}
-                <div class="row-content">
+                <div className="row-content">
                     <label className="label text" for="profile">Profile image</label>
 
                         <RadioGroup className="radio-group"  row aria-label="profile" name="profile" 
@@ -157,9 +171,9 @@ export class Employeeform extends React.Component
                      
                 </div>
                 {/* <-------------------Employee Gender--------------------> */}
-                <div class="row-content">
+                <div className="row-content">
                     
-                    <FormLabel className="label text" component="legend">Gender</FormLabel>
+                    <FormLabel component="legend" className="label text" >Gender</FormLabel>
 
                     <RadioGroup className="radio-group"  row aria-label="gender" 
                        value={this.state.employeeGender} onChange={ this.changeGenderEventHandler} name="gender" > 
@@ -171,7 +185,7 @@ export class Employeeform extends React.Component
 
                 </div>
                 {/* <---------------------Employee Department-------------------> */}
-                <div class="row-content">
+                <div className="row-content">
                     
                     <FormLabel component="legend" class="label text">Departments</FormLabel>
                     <div>
@@ -188,9 +202,8 @@ export class Employeeform extends React.Component
                     </div>
                 </div>
                 {/* <------------------------Employee Salary----------------------> */}
-                <div class="row-content">
-                    <label for="salary" class="label text">Choose your salary:
-                    </label>
+                <div className="row-content">
+                    <FormLabel component="legend" className="label text">Choose your salary:</FormLabel>
                     <div class="salary-slider">
                     <Box sx={{ width:500 }}>
                     <Slider defaultValue={1000000} valueLabelDisplay="auto" step={1500} min={300000} max={3000000} 
@@ -203,27 +216,27 @@ export class Employeeform extends React.Component
                 {/* <------------------------Employee Start Date---------------------> */}
                     <div class="row-content">
                     <FormLabel component="legend" class="label text" >Start Date</FormLabel>
-                        <div class="date-picker">
+                        <div className="date-picker">
                         <DatePickerComponent placeholder="Enter Date here:" 
                         selected={this.state.employeeStartDate} onChange={ this.changeStartDateEventHandler}></DatePickerComponent>
                         </div>
                     </div><br/>
                     {/* <-----------------------Employee Notes---------------------------> */}
-                    <div class="row-content">
+                    <div className="row-content">
                     <label for="notes" class="label text">Notes</label>
                     {/* <div class="text-notes"> */}
                     
                     <TextField fullWidth="50px" height="100px" variant="outlined" 
-                    placeholder="Enter Notes.." color="primary" 
+                    placeholder="Enter Notes.." color="primary" row={4}
                     value={this.state.employeeNotes} onChange={ this.changeNotesEventHandler}></TextField>
                     {/* </div> */}
                     </div>
                     {/* <-------------------------Cancel Button----------------------------> */}
-                    <div class="buttonParent">
-                        <Button color="default" variant="contained">Cancel</Button>
+                    <div className="buttonParent">
+                        <Button component={Link} to="/" color="default" variant="contained">Cancel</Button> &nbsp;&nbsp;
                         {/* <-------------------------Submit Button----------------------------> */}
-                    <div class="submit-button">
-                    <Button color="primary" variant="contained" onClick={this.onSubmit}>Submit</Button>
+                    <div className="submit-button">
+                    <Button component={Link} to="/"  color="primary" variant="contained" onClick={this.onSubmit}>Submit</Button>
                     </div>
                     {/* <button class="button submitButton" id="submitButton" 
                     type="submit">Submit
